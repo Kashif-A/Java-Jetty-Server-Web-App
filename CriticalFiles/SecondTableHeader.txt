@@ -1,0 +1,21 @@
+							</tbody>
+						</table>
+					</div> 
+					<div class="wrap-table100-nextcols js-pscroll">
+						<div class="table100-nextcols">
+							<table>
+								<thead>
+									<tr>
+										<th class="column2">Title</th>
+										<th class="column3">Author</th>
+										<th class="column3">Year</th>
+										<th class="column3">Edition</th>
+										<th class="column3">Publisher</th>
+										<th class="column3">ISBN</th>
+										<th class="column3">Cover</th>
+										<th class="column3">Condition</th>
+										<th class="column3">Price</th>
+										<th class="column4">Notes</th>
+									</tr>
+								</thead>
+								<tbody>

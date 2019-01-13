@@ -1,0 +1,14 @@
+							</tbody>
+						</table>
+					</div> 
+					<div class="wrap-table100-nextcols js-pscroll">
+						<div class="table100-nextcols">
+							<table>
+								<thead>
+									<tr>
+										<th class="column2">Title</th>
+										<th class="column3">Author</th>
+										<th class="column3">Copies Sold</th>
+									</tr>
+								</thead>
+								<tbody>

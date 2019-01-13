@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>MSc Rare Book Collection Project - Kashif Ahmed</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--======================================================================================================================================-->
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!--======================================================================================================================================-->
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--======================================================================================================================================-->
+	<link rel="stylesheet" type="text/css" href="https://codepen.io/kashif999/pen/Oaommx.css">
+<!--======================================================================================================================================-->
+<style>
+	input {
+	  display: block;
+		outline: none;
+		border: none !important;
+	}
+	textarea {
+	  display: block;
+	  outline: none;
+	}
+	textarea:focus, input:focus {
+	  border-color: transparent !important;
+	}
+	button {
+		outline: none !important;
+		border: none;
+		background: transparent;
+	}
+	button:hover {
+		cursor: pointer;
+	}
+	iframe {
+		border: none !important;
+	}
+
+	/****[ Scroll bar ]****/
+	.js-pscroll {
+	  position: relative;
+	  overflow: hidden;
+	}
+	.table100 .ps__rail-x {
+	  z-index: 1010;
+	  height: 6px;
+	  background-color: transparent;
+	  opacity: 1 !important;
+	  bottom: 10px;
+	}
+	.table100 .ps__rail-x::before {
+	  content: "";
+	  display: block;
+	  position: absolute;
+	  background-color: #e6e6e6;
+	  height: 100%;
+	  width: calc(100% - 30px);
+	  left: 15px;
+	  top: 0px;
+	}
+	.table100 .ps__rail-x .ps__thumb-x {
+	  height: 100%;
+	  bottom: 0;
+	  background-color: transparent;
+	  opacity: 1 !important;
+	}
+	.table100 .ps__rail-x .ps__thumb-x::before {
+	  content: "";
+	  display: block;
+	  position: absolute;
+	  background-color: #b3b3b3;
+	  height: 100%;
+	  width: calc(100% - 30px);
+	  top: 0;
+	  left: 15px;
+	}
+	.container-table100 {
+	  min-height: 100vh;
+	  display: -webkit-box;
+	  display: -webkit-flex;
+	  display: -moz-box;
+	  display: -ms-flexbox;
+	  display: flex;
+	}
+	.wrap-table100 {
+	  width: 100%;
+	}
+
+	/****[ Table ]****/
+	.table100 {
+	  background-color: #fff;
+	}
+	table {
+	  width: 100%;
+	}
+	th, td {
+	  font-weight: unset;
+	}
+	.column1 {
+	  padding-left: 8px;
+	}
+	.column2 {
+	  width: 300px;
+	}
+	.column3 {
+	  width: 150px;
+	}
+	.column4 {
+	  width: 580px;
+	  margin-right: 3px;
+	}
+	.table100 th {
+	  padding-top: 18px;
+	  padding-bottom: 18px;
+	}
+	.table100 td {
+	  padding-top: 14px;
+	  padding-bottom: 14px;
+	}
+
+	/****[ Fix col ]****/
+	.table100 {
+	  position: relative;
+	}
+	.table100-firstcol {
+	  background-color: #fff;
+	  position: absolute;
+	  padding-left: 10px;
+	  padding-right: 15px;
+	  text-align: left;
+	  z-index: 1000;
+	  top: 0;
+	  left: 0;
+	}
+	.table100-firstcol table {
+	  background-color: #fff;
+	}
+	.wrap-table100-nextcols {
+	  width: 100%;
+	  overflow: auto;
+	  padding-left: 150px;
+	  padding-bottom: 28px;
+	}
+	.table100-nextcols table{
+	  table-layout: fixed;
+	}
+	.shadow-table100-firstcol {
+	  box-shadow: 8px 0px 10px 0px rgba(0, 0, 0, 0.05);
+	  -moz-box-shadow: 8px 0px 10px 0px rgba(0, 0, 0, 0.05);
+	  -webkit-box-shadow: 8px 0px 10px 0px rgba(0, 0, 0, 0.05);
+	  -o-box-shadow: 8px 0px 10px 0px rgba(0, 0, 0, 0.05);
+	  -ms-box-shadow: 8px 0px 10px 0px rgba(0, 0, 0, 0.05);
+	}
+	.table100-firstcol table {
+	  background-color: transparent;
+	}
+
+	/****[ Ver1 ]****/
+	.table100.ver1 th {
+	  font-family: Roboto-Bold;
+	  font-weight: bold;
+	  font-size: 18px;
+	  color: #333333;
+	  line-height: 1.4;
+	  text-transform: uppercase;
+	}
+	.table100.ver1 td {
+	  font-family: Roboto-Medium;
+	  font-size: 14px;
+	  line-height: 1.4;
+	}
+	.table100.ver1 .table100-firstcol td {
+	  color: #666666;
+	}
+	.table100.ver1 .table100-nextcols td {
+	  color: #999999;
+	}
+	.table100.ver1 tr {
+	  border-bottom: 1px solid #f2f2f2;
+	}
+	a.button:hover,.form button:active,.form button:focus {
+	  background:#7d8289;
+	}
+	img{
+		width: 15px;
+	}
+	a.button {
+		-webkit-appearance: button;
+		-moz-appearance: button;
+		appearance: button;
+		background-color: #53565b;
+		text-decoration: none;
+		color: #fff;
+		width: 240px;
+		height: 40px;
+		line-height: 39px;
+		text-align: center;
+		border: white 2px solid;
+		display: inline-block;
+		margin-right: 20px;
+		margin-bottom: 20px;
+		outline: 0;
+		color: #FFFFFF;
+		font-size: 15px;
+		-webkit-transition: all 0.35 ease;
+		transition: all 1 ease;
+		position: relative;
+}
+h1 {
+	color: white;
+	font-size: 30px;
+	padding: 2px;
+	margin: 0px;
+}
+</style>
+
+<script type="text/javascript">
+
+</script>
+</head>
+
+<body>
+	
+	<div class="limiter">
+		<div class="container-table100">
+			<h1>RARE BOOK COLLECTION APP</h1>
+			<div class="wrap-table100">
+				<div>
+					<a href="/books" class="button">HOME</a>
+					<a href="/login" class="button">LOGIN</a>
+					<a href="isbnvalidator" class="button">ISBN VALIDATOR</a>
+					<a href="/searchbooks" class="button">SEARCH BOOK</a>
+				</div>
+
+				<div class="table100 ver1">
+					<div class="table100-firstcol">
+						<table>
+							<thead>
+								<tr class="row100">
+									<th class="column1">Book ID</th>
+								</tr>
+							</thead>
+							<tbody>

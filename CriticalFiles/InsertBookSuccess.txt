@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>MSc Rare Book Collection Project - Kashif Ahmed - Login Page</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--======================================================================================================================================-->
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!--======================================================================================================================================-->
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--======================================================================================================================================-->
+	<link rel="stylesheet" type="text/css" href="https://codepen.io/kashif999/pen/Oaommx.css">
+<!--======================================================================================================================================-->
+<style>
+.form button {
+		font-family: "Roboto", sans-serif;
+		text-transform: uppercase;
+		outline: 0;
+		background: #000000;
+		width: 100%;
+		border: black 1px solid;
+		padding: 15px;
+		color: #FFFFFF;
+		font-size: 18px;
+		-webkit-transition: all 0.3 ease;
+		transition: all 1 ease;
+		cursor: pointer;
+	}
+	.form button:hover,.form button:active,.form button:focus {
+		background:#4b4d51;
+  		color:#fff;
+		border: black 1px solid;
+	}
+</style>
+</head>
+
+<body>		
+	<div class="limiter">	
+		<div class="container-table100">
+			<div class="login-page">
+				<div class="form">
+							
+							<div id="one">Success!</div><div id="one"><span>&nbspBook Added Successfully...</span></div><br><br>
+
+							<form class="login-form" method=GET action="/adminsection">
+								<button>Click here to go to database</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+	</body>
+</html>
+
+
+
+								
+							
+					
+					
+									
+								

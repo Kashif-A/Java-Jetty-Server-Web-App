@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>MSc Rare Book Collection Project - Kashif Ahmed - Login Page</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--======================================================================================================================================-->
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!--======================================================================================================================================-->
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--======================================================================================================================================-->
+	<link rel="stylesheet" type="text/css" href="https://codepen.io/kashif999/pen/Oaommx.css">
+<!--======================================================================================================================================-->
+<style>
+.form button {
+		font-family: "Roboto", sans-serif;
+		text-transform: uppercase;
+		outline: 0;
+		background: #000000;
+		width: 100%;
+		border: black 1px solid;
+		padding: 15px;
+		color: #FFFFFF;
+		font-size: 18px;
+		-webkit-transition: all 0.3 ease;
+		transition: all 1 ease;
+		cursor: pointer;
+	}
+	.form button:hover,.form button:active,.form button:focus {
+		background:#4b4d51;
+  		color:#fff;
+		border: black 1px solid;
+	}
+	.login-page {
+		padding: 0px;
+		margin: 0px;
+	}
+	.form input {
+		width: 45%;
+		margin-right: 6px;
+	}
+	.form{
+		display: inline-block;
+		width: 950px;
+	}
+	#error3{
+		display: none;
+		margin-bottom: 15px;
+		text-align: center;
+		width: 100%;
+	}
+	#error2, #error, #error3 {
+		margin-botton: 15px;
+		float: left;
+		font-size: 10px;
+	    align-items: center;
+		font-size: 12px;
+		color: #d32410;
+		visibility: hidden;
+	}
+</style>
+</head>
+
+<body>		
+	<div class="limiter">	
+		<div class="container-table100">
+			<div class="login-page">
+				<div class="form">
+							
+							<div id="one">Please...</div><div id="one"><span>Fill Form to Insert Book...</span></div><br><br>
+							
+							<form class="login-form" method=POST onsubmit="return formChecker()" action="/insertbook" name="loginForm">
+							
+							
+							<div id="fields">
+								<input type="text" placeholder="Title" name="title" required/>
+								<input type="text" placeholder="Author" name="author" required/> <div style="padding-top: 4px;"></div>
+								<input type="text" placeholder="Year" name="year" required/>
+								<input type="text" placeholder="Edition" name="edition" required/> <div style="padding-top: 4px;"></div> 
+								<input type="text" placeholder="Publisher" name="publisher"/>
+								<input type="text" placeholder="ISBN" name="ISBN" required/> <div style="padding-top: 4px;"></div>
+								<p id="error3"><span>************************************** ISBN IS INVALID! **************************************</span></p>
+								<input type="text" placeholder="Cover" name="cover"/>
+								<input type="text" placeholder="Condition" name="condition"/> <div style="padding-top: 4px;"></div>
+								<input type="text" placeholder="Price" name="price" required/>
+								<input type="text" placeholder="Notes" name="notes"/>
+								<input type="text" placeholder="Sales" name="sales" required/>
+								<div style="padding-top: 10px;"></div>
+							</div>
+								<button>Submit</button>
+							</form>
+							<br>
+							<a href="/books"><button>go back</button></a>
+							<br><br>
+							<p id="error">Error! Only a number can be entered in Year, Edition, Price and Sales fields.</p>
+							<br>
+							<p id="error2">Error! No ' or ; allowed to prevent SQL Injection attacks. Please check ALL field.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+	</body>
+	
+	<script type="text/javascript">
+		function formChecker() {
+			var title, author, year, edition, publisher, ISBN, cover, condition, price, notes, sales;
+			var allow = true;
+			title = document.forms["loginForm"]["title"].value;
+			author = document.forms["loginForm"]["author"].value;
+			year = document.forms["loginForm"]["year"].value;
+			edition = document.forms["loginForm"]["edition"].value;
+			publisher = document.forms["loginForm"]["publisher"].value;
+			ISBN = document.forms["loginForm"]["ISBN"].value;
+			cover = document.forms["loginForm"]["cover"].value;
+			condition = document.forms["loginForm"]["condition"].value;
+			price = document.forms["loginForm"]["price"].value;
+			notes = document.forms["loginForm"]["notes"].value;
+			sales = document.forms["loginForm"]["sales"].value;
+			
+			
+			
+			function isValidISBN (ISBN) {
+				ISBN = ISBN.replace(/[^\dX]/gi, '');
+				if(ISBN.length == 10) {
+						var chars = ISBN.split('');
+						if(chars[9].toUpperCase() == 'X') {
+								chars[9] = 10;
+						}
+						var sum = 0;
+						for(var i = 0; i < chars.length; i++) {
+								sum += ((10-i) * parseInt(chars[i]));
+						}
+						allow = (sum % 11 == 0);
+						if (allow === false){
+							document.getElementById("error3").style.visibility = "visible";
+							document.getElementById("error3").style.display = "block";
+							setTimeout(function(){
+								document.getElementById("error3").style.visibility = "hidden";
+								document.getElementById("error3").style.display = "none";
+							}, 6000);
+						}
+				} else if(ISBN.length == 13) {
+						var chars = ISBN.split('');
+						var sum = 0;
+						for (var i = 0; i < chars.length; i++) {
+								if(i % 2 == 0) {
+										sum += parseInt(chars[i]);
+								} else {
+										sum += parseInt(chars[i]) * 3;
+								}
+						}
+						allow = (sum % 10 == 0);
+						if (allow === false){
+							document.getElementById("error3").style.visibility = "visible";
+							document.getElementById("error3").style.display = "block";
+							setTimeout(function(){
+								document.getElementById("error3").style.visibility = "hidden";
+								document.getElementById("error3").style.display = "none";
+							}, 6000);
+						}
+				} else {
+						document.getElementById("error3").style.visibility = "visible";
+						document.getElementById("error3").style.display = "block";
+						setTimeout(function(){
+							document.getElementById("error3").style.visibility = "hidden";
+							document.getElementById("error3").style.display = "none";
+						}, 6000);
+						allow = false;
+				}
+			}
+			
+			isValidISBN (ISBN);
+			
+			
+			//-----SQL INJECTION ATTACK PREVENTION-----//
+			//Check title field.
+			if((title.indexOf('\'') > -1) || (title.indexOf(';') > -1)){
+				document.getElementById("error2").style.visibility = "visible";
+					setTimeout(function(){
+						document.getElementById("error2").style.visibility = "hidden";
+					}, 6000);
+				allow = false;
+			}
+			
+			//Check author field.
+			if((author.indexOf('\'') > -1) || (author.indexOf(';') > -1)){
+				document.getElementById("error2").style.visibility = "visible";
+					setTimeout(function(){
+						document.getElementById("error2").style.visibility = "hidden";
+					}, 6000);
+				allow = false;
+			}
+			
+			//Check year field.
+			if((year.indexOf('\'') > -1) || (year.indexOf(';') > -1)){
+				document.getElementById("error2").style.visibility = "visible";
+					setTimeout(function(){
+						document.getElementById("error2").style.visibility = "hidden";
+					}, 6000);
+				allow = false;
+			}
+			
+			//Check edition field.
+			if((edition.indexOf('\'') > -1) || (edition.indexOf(';') > -1)){
+				document.getElementById("error2").style.visibility = "visible";
+					setTimeout(function(){
+						document.getElementById("error2").style.visibility = "hidden";
+					}, 6000);
+				allow = false;
+			}
+			
+			//Check publisher field.
+			if((publisher.indexOf('\'') > -1) || (publisher.indexOf(';') > -1)){
+				document.getElementById("error2").style.visibility = "visible";
+					setTimeout(function(){
+						document.getElementById("error2").style.visibility = "hidden";
+					}, 6000);
+				allow = false;
+			}
+			
+			//Check ISBN field.
+			if((ISBN.indexOf('\'') > -1) || (ISBN.indexOf(';') > -1)){
+				document.getElementById("error2").style.visibility = "visible";
+					setTimeout(function(){
+						document.getElementById("error2").style.visibility = "hidden";
+					}, 6000);
+				allow = false;			
+			}
+			
+			//Check cover field.
+			if((cover.indexOf('\'') > -1) || (cover.indexOf(';') > -1)){
+				document.getElementById("error2").style.visibility = "visible";
+					setTimeout(function(){
+						document.getElementById("error2").style.visibility = "hidden";
+					}, 6000);
+				allow = false;		
+			}
+			
+			//Check condition field.
+			if((condition.indexOf('\'') > -1) || (condition.indexOf(';') > -1)){
+				document.getElementById("error2").style.visibility = "visible";
+					setTimeout(function(){
+						document.getElementById("error2").style.visibility = "hidden";
+					}, 6000);
+				allow = false;			
+			}
+			
+			//Check price field.
+			if((price.indexOf('\'') > -1) || (price.indexOf(';') > -1)){
+				document.getElementById("error2").style.visibility = "visible";
+					setTimeout(function(){
+						document.getElementById("error2").style.visibility = "hidden";
+					}, 6000);
+				allow = false;			
+			}
+			
+			//Check notes field.
+			if((notes.indexOf('\'') > -1) || (notes.indexOf(';') > -1)){
+				document.getElementById("error2").style.visibility = "visible";
+					setTimeout(function(){
+						document.getElementById("error2").style.visibility = "hidden";
+					}, 6000);
+				allow = false;			
+			}
+			
+			//Check sales field.
+			if((sales.indexOf('\'') > -1) || (sales.indexOf(';') > -1)){
+				document.getElementById("error2").style.visibility = "visible";
+					setTimeout(function(){
+						document.getElementById("error2").style.visibility = "hidden";
+					}, 6000);
+				allow = false;			
+			}
+			
+			//If price range used.
+			if(isNaN(year) || isNaN(price) || isNaN(edition) || isNaN(sales)){
+					document.getElementById("error").style.visibility = "visible";
+					setTimeout(function(){
+						document.getElementById("error").style.visibility = "hidden";
+					}, 6000);
+				allow = false;
+					return false;
+				} 
+				
+			return allow;
+			
+		}
+	</script>
+</html>

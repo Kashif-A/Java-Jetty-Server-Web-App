@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>MSc Rare Book Collection Project - Kashif Ahmed - Login Page</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--======================================================================================================================================-->
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!--======================================================================================================================================-->
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--======================================================================================================================================-->
+	<link rel="stylesheet" type="text/css" href="https://codepen.io/kashif999/pen/Oaommx.css">
+<!--======================================================================================================================================-->
+<style>
+.form button {
+		font-family: "Roboto", sans-serif;
+		text-transform: uppercase;
+		outline: 0;
+		background: #000000;
+		width: 100%;
+		border: black 1px solid;
+		padding: 15px;
+		color: #FFFFFF;
+		font-size: 18px;
+		-webkit-transition: all 0.3 ease;
+		transition: all 1 ease;
+		cursor: pointer;
+	}
+	.form button:hover,.form button:active,.form button:focus {
+		background:#4b4d51;
+  		color:#fff;
+		border: black 1px solid;
+	}
+	.login-page {
+		padding: 0px;
+		margin: 0px;
+	}
+	.form{
+		display: inline-block;
+		width: 530px;
+	}
+	#errorTitle, #errorAuthor, #error, #notAnError, #errorText {
+		padding: 0px;
+		margin-bottom: 10px;
+		width: 500px;
+	    display: flex;
+		height: 5px;
+	    align-items: center;
+		font-size: 12px;
+		color: #d32410;
+		visibility: hidden;
+	}
+	
+</style>
+</head>
+
+<body>		
+	<div class="limiter">	
+		<div class="container-table100">
+			<div class="login-page">
+				<div class="form">
+							
+							<div id="one">Please...</div><div id="one"><span>Edit Details to Search...</span></div><br><br>
+
+							<form class="loginForm" method=POST action="/books" onsubmit="return formChecker()" name="loginForm">
+							
+								<input type="text" placeholder="Book Title" id="title" name="title"/>
+								<div id="errorTitle"><p>Error! No ' or ; allowed to prevent SQL Injection attacks.</p></div>
+								
+								<input type="text" placeholder="Author Name" id="author" name="author"/>
+								<div id="errorAuthor"><p>Error! No ' or ; allowed to prevent SQL Injection attacks.</p></div>
+								
+                                <input type="text" placeholder="Minimum Price" id="minPrice" name="minPrice"/>
+								<div id="notAnError"><p>Not an Error</p></div>
+								
+								<input type="text" placeholder="Maximum Price" id="maxPrice" name="maxPrice"/>
+								<div id="notAnError"><p>Not an Error</p></div>
+								
+								<button id="submitButton">Submit Query</button>
+							</form>
+							<br>
+								<a href="/books"><button>go back</button></a>
+								<br><br>
+								<p id="errorText">Error</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+	<script type="text/javascript">
+		
+		
+		function formChecker() {
+			var title, author, minPrice, maxPrice, errorTitle, errorAuthor, errorMinPrice, errorMaxPrice;
+			var allow = true;
+			title = document.forms["loginForm"]["title"].value;
+			author = document.forms["loginForm"]["author"].value;
+			minPrice = document.forms["loginForm"]["minPrice"].value;
+			maxPrice = document.forms["loginForm"]["maxPrice"].value;
+			
+			//If nothing filled in.
+			if((minPrice == null || minPrice == "") && (maxPrice == null || maxPrice == "") && (title == null || title == "") && (author == null || author == "")){
+				document.getElementById("errorText").innerHTML = "Error! All fields are empty.";
+				document.getElementById("errorText").style.visibility = "visible";
+				setTimeout(function(){
+					document.getElementById("errorText").style.visibility = "hidden";
+				}, 3500);
+				return false;
+			} 
+			
+			//Check title field.
+			if((title.indexOf('\'') > -1) || (title.indexOf(';') > -1)){
+				document.getElementById("errorTitle").style.visibility = "visible";
+				setTimeout(function(){
+						document.getElementById("errorTitle").style.visibility = "hidden";
+					}, 3500);
+				allow = false;
+			}
+			
+			//Check author field.
+			if((author.indexOf('\'') > -1) || (author.indexOf(';') > -1)){
+				document.getElementById("errorAuthor").style.visibility = "visible";
+				setTimeout(function(){
+						document.getElementById("errorAuthor").style.visibility = "hidden";
+					}, 3500);
+				allow = false;			
+			}
+						
+			//If price range used.
+			if((minPrice !== null || minPrice !== "") && (maxPrice !== null || maxPrice !== "")){
+				if(isNaN(minPrice) || isNaN(maxPrice)){
+					document.getElementById("errorText").innerHTML = "Error! Only a number can be entered in price fields.";
+					document.getElementById("errorText").style.visibility = "visible";
+					setTimeout(function(){
+						document.getElementById("errorText").style.visibility = "hidden";
+					}, 3500);
+					return false;
+				} 
+				
+				if((minPrice == null || minPrice == "") && (maxPrice !== null || maxPrice !== "") && allow !== false){
+					document.forms["loginForm"]["minPrice"].value = 0;
+				}
+				
+				if((maxPrice == null || maxPrice == "") && (minPrice !== null || minPrice !== "") && allow !== false){
+					document.forms["loginForm"]["maxPrice"].value = 1000000;
+				} 
+			}	
+			return allow;
+		}
+	</script>
+	</body>
+</html>
