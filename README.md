@@ -15,7 +15,7 @@ SQlite database<br>
 Jetty Server<br>
 ISBN Validator algorithm<br>
 MD5 password hashing<br>
-Javascript/HTML/CSS<br>
+Javascript/HTML/CSS<br><br>
 Normal users can see the stored book information retrieved from an SQlite database and search the database based on book title, author or price range. Admin users can insert, delete or modify book information. Admin users can also log sales records.
 
 
