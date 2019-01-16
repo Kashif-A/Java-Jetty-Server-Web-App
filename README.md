@@ -19,6 +19,4 @@ Normal users can see the stored book information retrieved from an SQlite databa
 
 ALL THE JAVA CLASSES IN PROJECT
 
-Please find Github source code links below image.
-
 ![alt text](https://kashif-ahmed.com/wp-content/uploads/2019/01/jettyprojclasses-210x300.png)
